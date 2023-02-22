@@ -97,6 +97,32 @@ def get_tree_nodes(node, nodes):
         get_tree_nodes(child, nodes)
     return nodes
 
+# def find_tree_differences(old_tree, new_tree):
+#     added, removed = [], []
+#
+#     def helper(old_tree, new_tree, path):
+#         nonlocal added, removed
+#         old_children_data = {node.data for node in old_tree.children}
+#         new_children_data = {node.data for node in new_tree.children}
+#
+#         added_nodes = [node for node in new_tree.children if node.data not in old_children_data]
+#         removed_nodes = [node for node in old_tree.children if node.data not in new_children_data]
+#
+#         for node in added_nodes:
+#             if node not in added:
+#                 added.append((path + [node], node))
+#         for node in removed_nodes:
+#             if node not in removed:
+#                 removed.append((path + [node], node))
+#
+#         for node1, node2 in zip(old_tree.children, new_tree.children):
+#             if node1.data == node2.data:
+#                 helper(node1, node2, path + [node1])
+#
+#     helper(old_tree, new_tree, [old_tree])
+#
+#     return added, removed
+
 def find_tree_differences(old_tree, new_tree):
     added, removed = [], []
 
@@ -115,13 +141,15 @@ def find_tree_differences(old_tree, new_tree):
             if node not in removed:
                 removed.append((path + [node], node))
 
-        for node1, node2 in zip(old_tree.children, new_tree.children):
-            if node1.data == node2.data:
-                helper(node1, node2, path + [node1])
+        for node in old_tree.children:
+            matching_nodes = [n for n in new_tree.children if n.data == node.data]
+            if matching_nodes:
+                helper(node, matching_nodes[0], path + [node])
 
     helper(old_tree, new_tree, [old_tree])
 
     return added, removed
+
 
 class xmlToObject:
     # xmlSet=[]
@@ -129,12 +157,12 @@ class xmlToObject:
     # prefix='{http://www.sitemaps.org/schemas/sitemap/0.9}'
     # #need to make it generic for all cases
     #
-    url = "https://www.cynergy.app/sitemap_index.xml"
-    urlTree = getXML(url)
-    printTree(urlTree)
-
-    url2 = "https://seocrawl.com/sitemap_index.xml"
-    urlTree2 = getXML(url2)
+    # url = "https://www.cynergy.app/sitemap_index.xml"
+    # urlTree = getXML(url)
+    # printTree(urlTree)
+    #
+    # url2 = "https://seocrawl.com/sitemap_index.xml"
+    # urlTree2 = getXML(url2)
     # printTree(urlTree2)
     #
     # tree = ET.parse('test.xml')
@@ -185,43 +213,43 @@ class xmlToObject:
     #     print(child.data + ' parent: ' + urlTree.data)
 
     #testing comparison
-    # testTree = treeObject('1')
-    # testTree.children.append(treeObject('5',testTree))
-    # # testTree.children.append(treeObject('3',testTree))
-    # testTree.children.append(treeObject('4',testTree))
+    testTree = treeObject('1')
+    testTree.children.append(treeObject('5',testTree))
+    # testTree.children.append(treeObject('3',testTree))
+    testTree.children.append(treeObject('4',testTree))
     # testTree.children[0].children.append(treeObject('10',testTree.children[0]))
-    # # testTree.children[0].children.append(treeObject('6',testTree.children[0]))
-    # # testTree.children[0].children.append(treeObject('7',testTree.children[0]))
+    # testTree.children[0].children.append(treeObject('6',testTree.children[0]))
+    # testTree.children[0].children.append(treeObject('7',testTree.children[0]))
     # testTree.children[0].children[0].children.append(treeObject('11',testTree.children[0].children[0]))
-    # #printTree(testTree)
-    #
-    # testTree2 = treeObject('1')
-    # # testTree2.children.append(treeObject('5', testTree2))
-    # # testTree2.children.append(treeObject('12', testTree2))
+    #printTree(testTree)
+
+    testTree2 = treeObject('1')
     # testTree2.children.append(treeObject('5', testTree2))
-    # # testTree2.children[0].children.append(treeObject('2', testTree2.children[0]))
-    # # testTree2.children[0].children.append(treeObject('9', testTree2.children[0]))
-    # # testTree2.children[0].children.append(treeObject('7', testTree2.children[0]))
-    # # testTree2.children[0].children[0].children.append(treeObject('8', testTree2.children[0].children[0]))
-    # # printTree(testTree2)
-    #
-    # added, removed = find_tree_differences(urlTree,urlTree2)
-    #
-    # print('-----------------------')
-    # print("\033[1m"+"\033[4m"+"Added: "+"\033[0m")
-    # for path, node in added:
-    #     node_data = node.data
-    #     print("\nAdded node with data:", node_data)
-    #     print("Path: ", end=" ")
-    #     for i in range(len(path)-1):
-    #         print(path[i].data+" -> ", end=" ")
-    #     print(path[len(path)-1].data, end=" ")
-    #
-    # print("\n\n\033[1m"+"\033[4m"+"Removed: "+"\033[0m")
-    # for path, node in removed:
-    #     node_data = node.data
-    #     print("\nRemoved node with data:", node_data)
-    #     print("Path: ", end=" ")
-    #     for i in range(len(path)-1):
-    #         print(path[i].data + " -> ", end=" ")
-    #     print(path[len(path)-1].data, end=" ")
+    testTree2.children.append(treeObject('12', testTree2))
+    testTree2.children.append(treeObject('5', testTree2))
+    # testTree2.children[0].children.append(treeObject('2', testTree2.children[0]))
+    # testTree2.children[0].children.append(treeObject('9', testTree2.children[0]))
+    # testTree2.children[0].children.append(treeObject('7', testTree2.children[0]))
+    # testTree2.children[0].children[0].children.append(treeObject('8', testTree2.children[0].children[0]))
+    # printTree(testTree2)
+
+    added, removed = find_tree_differences(testTree,testTree2)
+
+    print('-----------------------')
+    print("\033[1m"+"\033[4m"+"Added: "+"\033[0m")
+    for path, node in added:
+        node_data = node.data
+        print("\nAdded node with data:", node_data)
+        print("Path: ", end=" ")
+        for i in range(len(path)-1):
+            print(path[i].data+" -> ", end=" ")
+        print(path[len(path)-1].data, end=" ")
+
+    print("\n\n\033[1m"+"\033[4m"+"Removed: "+"\033[0m")
+    for path, node in removed:
+        node_data = node.data
+        print("\nRemoved node with data:", node_data)
+        print("Path: ", end=" ")
+        for i in range(len(path)-1):
+            print(path[i].data + " -> ", end=" ")
+        print(path[len(path)-1].data, end=" ")
