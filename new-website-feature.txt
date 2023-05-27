@@ -1,0 +1,47 @@
+{
+    "featuresData": {
+        "www.website.com": {
+            "2fa": false,
+            "LoginLogout": true,
+            "LoginLogoutEvidence": [
+                "https://www.website.com/about-us/sign-in/password",
+		        "https://www.website.com/about-us/sign-out/recovery",
+		      "https://www.website.com/about-us/logout",
+		      "https://www.website.com/about-us/special/wp-login"
+            ],
+            "bagCart": false,
+            "certificatePinning": false,
+            "chatBot": true,
+	        "chatBotEvidence": [
+		        "https://www.website.com/services/hosting/shared-hosting/chat",
+		        "https://www.website.com/portfolio/tree/bot"
+	        ],
+            "couponProm": true,
+            "couponPromEvidence": [
+                "https://www.website.com/system/cart/promotion",
+                "https://www.website.com/system/basket/coupon",
+		        "https://www.website.com/about-us/pack/route/coupon",
+                "https://www.website.com/about-us/voyage/promotion"
+            ],
+            "geoLocation": false,
+            "payment": false,
+            "profileSettings": false,
+            "registration": false,
+            "resetPassword": true,
+            "resetPasswordEvidence": [
+                "https://www.website.com/about-us/travel/password",
+                "https://www.website.com/about-us/sign-in/password",
+                "https://www.website.com/about-us/sign-out/recovery",
+                "https://www.website.com/portfolio/hosting/phone/recovery"
+            ],
+            "retest": false,
+            "sso": false,
+            "waf": false
+        }
+    },
+    "targets": [
+        {
+            "tld": "https://www.website.com"
+        }
+    ]
+}

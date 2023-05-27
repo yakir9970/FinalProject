@@ -1,0 +1,46 @@
+{
+    "featuresData": {
+        "www.website.com": {
+            "2fa": false,
+            "LoginLogout": true,
+            "LoginLogoutEvidence": [
+                "https://www.website.com/about-us/sign-in",
+		        "https://www.website.com/about-us/sign-out",
+		        "https://www.website.com/about-us/logout"
+            ],
+            "bagCart": true,
+            "bagCartEvidence": [
+                "https://www.website.com/system/cart",
+                "https://www.website.com/system/basket"
+                
+            ],
+            "certificatePinning": false,
+            "chatBot": false,
+            "couponProm": true,
+            "couponPromEvidence": [
+                "https://www.website.com/system/cart/promotion",
+                "https://www.website.com/system/basket/coupon"
+            ],
+            "geoLocation": false,
+            "payment": false,
+            "profileSettings": false,
+            "registration": false,
+            "resetPassword": true,
+            "resetPasswordEvidence": [
+                "https://www.website.com/about-us/travel/password",
+                "https://www.website.com/about-us/sign-in/password",
+                "https://www.website.com/services/web-design/snapshot/password",
+                "https://www.website.com/about-us/sign-out/recovery",
+                "https://www.website.com/portfolio/hosting/phone/recovery"
+            ],
+            "retest": false,
+            "sso": false,
+            "waf": false
+        }
+    },
+    "targets": [
+        {
+            "tld": "https://www.website.com"
+        }
+    ]
+}

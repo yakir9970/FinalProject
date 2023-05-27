@@ -25,6 +25,9 @@
     <loc>https://example.com/page3/tab3</loc>
   </url>
   <url>
-    <loc>https://example.com/page3/tab3/another3</loc>
+    <loc>https://example.com/page3/tab3/new3</loc>
+  </url>
+  <url>
+    <loc>https://example.com/page3/tab3/new3/another3</loc>
   </url>
 </urlset>
